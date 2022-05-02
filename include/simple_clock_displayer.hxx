@@ -3,7 +3,7 @@
 class SimpleClockDisplayer : public BaseClockDisplayer
 {
 public:
-    SimpleClockDisplayer(BaseClock *clock);
+    SimpleClockDisplayer(BaseClock *clock = 0);
 
     virtual void show();
 };

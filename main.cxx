@@ -3,18 +3,34 @@
 #include "simple_clock_displayer.hxx"
 #include "utc_clock.hxx"
 
+#include <vector>
+
 int main()
 {
-    BaseClock *clock1 = new LocalClock();
-    BaseClock *clock2 = new UTCClock();
+    std::vector<BaseClock *> clocks;
+    clocks.push_back(new LocalClock());
+    clocks.push_back(new UTCClock());
 
-    BaseClockDisplayer *displayer1 = new SimpleClockDisplayer(clock1);
-    BaseClockDisplayer *displayer2 = new PrettyClockDisplayer(clock2);
+    std::vector<BaseClockDisplayer *> clock_displayers;
+    clock_displayers.push_back(new SimpleClockDisplayer());
+    clock_displayers.push_back(new PrettyClockDisplayer());
 
-    displayer1->show();
-    displayer2->show();
+    for (auto clock_iterator = clocks.begin(); clock_iterator != clocks.end(); clock_iterator++)
+    {
+        for (auto clock_displayer_iterator = clock_displayers.begin(); clock_displayer_iterator != clock_displayers.end(); clock_displayer_iterator++)
+        {
+            (*clock_displayer_iterator)->set_clock(*clock_iterator);
+            (*clock_displayer_iterator)->show();
+        }
+    }
 
-    delete displayer1;
-    delete clock2;
-    delete clock1;
+    for (auto clock_displayer_iterator = clock_displayers.begin(); clock_displayer_iterator != clock_displayers.end(); clock_displayer_iterator++)
+    {
+        delete *clock_displayer_iterator;
+    }
+
+    for (auto clock_iterator = clocks.begin(); clock_iterator != clocks.end(); clock_iterator++)
+    {
+        delete *clock_iterator;
+    }
 }

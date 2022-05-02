@@ -8,7 +8,8 @@ protected:
     BaseClock *clock_;
 
 public:
-    BaseClockDisplayer(BaseClock *clock);
+    BaseClockDisplayer(BaseClock *clock = 0);
 
+    void set_clock(BaseClock *clock);
     virtual void show() = 0;
 };

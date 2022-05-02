@@ -4,3 +4,8 @@ BaseClockDisplayer::BaseClockDisplayer(BaseClock *clock)
 {
     clock_ = clock;
 }
+
+void BaseClockDisplayer::set_clock(BaseClock *clock)
+{
+    clock_ = clock;
+}

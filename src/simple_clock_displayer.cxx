@@ -8,6 +8,11 @@ SimpleClockDisplayer::SimpleClockDisplayer(BaseClock *clock) : BaseClockDisplaye
 
 void SimpleClockDisplayer::show()
 {
+    if (0 == clock_)
+    {
+        return;
+    }
+
     auto tm = clock_->get_time();
-    std::cout << clock_->get_type() << " - " << tm->tm_hour << ":" << tm->tm_sec << std::endl;
+    std::cout << clock_->get_type() << " - " << tm->tm_hour << ":" << tm->tm_min << ":" << tm->tm_sec << std::endl;
 }
